@@ -1,7 +1,7 @@
 ﻿namespace InSearchOfMiruine.Constants
 {
     /// <summary>
-    /// Folder paths for I/O
+    /// Folder paths for I/O.
     /// </summary>
     public class FoldersPathConstants
     {

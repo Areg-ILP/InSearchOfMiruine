@@ -52,9 +52,7 @@ namespace InSearchOfMiruine.FIleManagement
                 return new ScanResult()
                 {
                     ProcessedFilesCount = allPaths.Length,
-                    CorruptedFilesCount = _corruptedStrains.Count,
                     CorruptedFileNames = _corruptedStrains,
-                    ValidStrainsCount = strainsProduceMiruine.Count,
                     ValidStrainNumbers = strainsProduceMiruine,
                     TimeElapsed = watch.Elapsed
                 };

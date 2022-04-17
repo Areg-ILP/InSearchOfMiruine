@@ -7,13 +7,20 @@ namespace InSearchOfMiruine.Models
     {
         public string DeveloperName => "Areg Gevorgyan";
         /// <summary>
-        /// 
+        /// All Processed files count.
         /// </summary>
         public int ProcessedFilesCount { get; set; }
-        public int  CorruptedFilesCount { get; set; }
-        public int ValidStrainsCount { get; set; }
+        /// <summary>
+        /// Curruppted file names.
+        /// </summary>
         public HashSet<string> CorruptedFileNames { get; set; }
+        /// <summary>
+        /// Valid strain numbers.
+        /// </summary>
         public HashSet<string> ValidStrainNumbers { get; set; }
+        /// <summary>
+        /// Migration Execution time.
+        /// </summary>
         public TimeSpan TimeElapsed { get; set; }
     }
 }
