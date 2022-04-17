@@ -1,9 +1,5 @@
 ﻿using InSearchOfMiruine.Constants;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InSearchOfMiruine.Models
 {
@@ -46,7 +42,7 @@ namespace InSearchOfMiruine.Models
                         var firstCode = int.Parse(gen.Code.First().ToString());
                         var lastCode = int.Parse(gen.Code.Last().ToString());
 
-                        //case: sum of first and last code of gen must be eqaul gen index
+                        //case: sum of first and last code of gen must be less or eqaul gen index
                         return firstCode + lastCode <= gen.Index + 1;
                     }
                 }

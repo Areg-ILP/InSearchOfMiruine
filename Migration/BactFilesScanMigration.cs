@@ -3,6 +3,7 @@ using InSearchOfMiruine.Extentions;
 using InSearchOfMiruine.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -10,11 +11,6 @@ namespace InSearchOfMiruine.FIleManagement
 {
     public static class BactFilesScanMigration
     {
-        /// <summary>
-        /// Bacts folder path constant value.
-        /// </summary>
-        private const string BACTS_FOLDER_PATH = "C:\\temp\\Bact\\folder";
-
         /// <summary>
         /// Strains that have not been validated.
         /// </summary>
@@ -27,7 +23,7 @@ namespace InSearchOfMiruine.FIleManagement
         /// </summary>
         static BactFilesScanMigration()
         {
-            if (!Directory.Exists(BACTS_FOLDER_PATH))
+            if (!Directory.Exists(FoldersPathConstants.BACTS_FOLDER_PATH))
             {
                 throw new Exception("Bact files not exsit");
             }
@@ -41,22 +37,28 @@ namespace InSearchOfMiruine.FIleManagement
         /// <returns>Scan result.</returns>
         public static ScanResult Run()
         {
-            var allPaths = Directory.GetFiles(BACTS_FOLDER_PATH);
+            var watch = new Stopwatch();
 
-            var strainsProduceMiruine = allPaths.Where(p => ValidateBactFileForLoad(p))
-                                                .Select(s => ValidateAndGetStrain(s))
-                                                .Where(s => s.IsValid && CanStrainGensProduceMiruine(s))
-                                                .Select(n => n.StrainNumber)
-                                                .ToHashSet();
-                                     
-            return new ScanResult()
+            watch.Restart();
             {
-                ProccesserFilesCount = allPaths.Length,
-                CourruptedFilesCount = _corruptedStrains.Count,
-                CourruptedFileNames = _corruptedStrains,
-                ValidStrainsCount = strainsProduceMiruine.Count,
-                ValidStrainNumbers = strainsProduceMiruine,
-            };
+                var allPaths = Directory.GetFiles(FoldersPathConstants.BACTS_FOLDER_PATH);
+
+                var strainsProduceMiruine = allPaths.Where(p => ValidateBactFileForLoad(p))
+                                                    .Select(s => ValidateAndGetStrain(s))
+                                                    .Where(s => s.IsValid && CanStrainGensProduceMiruine(s))
+                                                    .Select(n => n.StrainNumber)
+                                                    .ToHashSet();
+
+                return new ScanResult()
+                {
+                    ProcessedFilesCount = allPaths.Length,
+                    CorruptedFilesCount = _corruptedStrains.Count,
+                    CorruptedFileNames = _corruptedStrains,
+                    ValidStrainsCount = strainsProduceMiruine.Count,
+                    ValidStrainNumbers = strainsProduceMiruine,
+                    TimeElapsed = watch.Elapsed
+                };
+            }
         }
 
         /// <summary>
