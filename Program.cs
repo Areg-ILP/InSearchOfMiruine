@@ -1,8 +1,7 @@
-﻿using InSearchOfMiruine.FIleManagement;
+﻿using System;
+using InSearchOfMiruine.FIleManagement;
 using InSearchOfMiruine.Logging;
 using InSearchOfMiruine.Models;
-using System;
-using System.Diagnostics;
 
 namespace InSearchOfMiruine
 {
