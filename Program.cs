@@ -9,19 +9,15 @@ namespace InSearchOfMiruine
     {
         static void Main(string[] args)
         {
-            var scanResult = new ScanResult();
             try
-            {
-                scanResult = BactFilesScanMigration.Run();
+            {                
+                var scanResult = BactFilesScanMigration.Run();
+                LogMaster.Info(scanResult);
             }
             catch(Exception ex)
             {
                 LogMaster.Error(ex.Message);
-            }
-            finally
-            {
-                LogMaster.Info(scanResult);
-            }
+            } 
         }
     }
 }
