@@ -28,15 +28,15 @@ namespace InSearchOfMiruine.Logging
             string scanInfo = string.Empty;
 
             scanInfo += $"Dev: {scanResult.DeveloperName}\n";
-            scanInfo += $"Processed count: {scanResult.ProcessedFilesCount}\n";
-            scanInfo += $"Corrupted count: {scanResult.CorruptedFileNames.Count}\n";
-            scanInfo += $"Found count: {scanResult.ValidStrainNumbers.Count}\n\n";
+            scanInfo += $"Processed Count: {scanResult.ProcessedFilesCount}\n";
+            scanInfo += $"Corrupted Count: {scanResult.CorruptedFileNames.Count}\n";
+            scanInfo += $"Found Count: {scanResult.ValidStrainNumbers.Count}\n\n";
 
-            scanInfo += $"=== Corrupted file names ===\n";
+            scanInfo += $"=== Corrupted File Names ===\n";
             scanInfo += string.Join("\n", scanResult.CorruptedFileNames);
-            scanInfo += $"\n=== Valid file names ===\n";
+            scanInfo += $"\n=== Valid Strain Numbers ===\n";
             scanInfo += string.Join("\n", scanResult.ValidStrainNumbers);
-            scanInfo += $"\n\nTime elapsed: {scanResult.TimeElapsed}";
+            scanInfo += $"\n\nTime Elapsed: {scanResult.TimeElapsed}";
 
             File.WriteAllText(path, scanInfo);
         }

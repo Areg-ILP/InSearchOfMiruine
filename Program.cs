@@ -1,7 +1,6 @@
 ﻿using System;
 using InSearchOfMiruine.FIleManagement;
 using InSearchOfMiruine.Logging;
-using InSearchOfMiruine.Models;
 
 namespace InSearchOfMiruine
 {
