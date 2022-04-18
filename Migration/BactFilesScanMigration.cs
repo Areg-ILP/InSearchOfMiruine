@@ -47,7 +47,6 @@ namespace InSearchOfMiruine.FIleManagement
                                                     .Select(s => ValidateAndGetStrain(s))
                                                     .Where(s => s.IsValid && CanStrainGensProduceMiruine(s))
                                                     .Select(n => n.StrainNumber)
-                                                    .OrderBy(n => int.Parse(n))
                                                     .ToHashSet();
 
                 return new ScanResult()
@@ -107,15 +106,19 @@ namespace InSearchOfMiruine.FIleManagement
                                    .Select(s => s.Trim())
                                    .ToList();
 
+            var strainNumberString = Path.GetFileNameWithoutExtension(path)
+                                         .Split("_")
+                                         .Last();
+
+            var strainNumber = Convert.ToInt32(strainNumberString);
+            var isVaild = geneticCodes.IsValidGeneticList();
+
             return new StrainModel()
             {
-                StrainNumber = Path.GetFileNameWithoutExtension(path)
-                                   .Split("_")
-                                   .Last()
-                                   .Trim('0'),
-                FileName = Path.GetFileName(path),
-                IsValid = geneticCodes.IsValidGeneticList(),
-                GeneticCodes = geneticCodes
+                StrainNumber = strainNumber,
+                IsValid = isVaild,
+                GeneticCodes = geneticCodes,
+                FileName = Path.GetFileName(path)
             };
         }
 

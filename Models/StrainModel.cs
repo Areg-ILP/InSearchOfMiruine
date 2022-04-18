@@ -11,7 +11,7 @@ namespace InSearchOfMiruine.Models
         /// <summary>
         /// Number of strain (get from file name).
         /// </summary>
-        public string StrainNumber { get; set; }
+        public int StrainNumber { get; set; }
         /// <summary>
         /// Genetic codes of strain.
         /// </summary>

@@ -17,7 +17,7 @@ namespace InSearchOfMiruine.Models
         /// <summary>
         /// Valid strain numbers.
         /// </summary>
-        public HashSet<string> ValidStrainNumbers { get; set; }
+        public HashSet<int> ValidStrainNumbers { get; set; }
         /// <summary>
         /// Migration Execution time.
         /// </summary>
