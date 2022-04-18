@@ -18,33 +18,27 @@ namespace InSearchOfMiruine.Models
         /// Check if gen valid.
         /// </summary>
         /// <param name="gen">gen model.</param>
-        /// <returns>Validation flag.</returns>
+        /// <returns>Validation flag.</returns>       
         public static bool IsValidGen(GenModel gen)
         {
-            //case: contain bad code "553";
-            bool badNumberCase = gen.Code.Contains(MiruineProduceGenValidationConstatns.REQURIED_CODE +
-                                                   MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE);
-            
-            if(!badNumberCase)
+            //case: code contain required twix code
+            bool requiredTwixCodeCase = gen.Code.Contains(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE);
+
+            if (requiredTwixCodeCase)
             {
-                //case: contain required twix code "53"
-                bool requiredTwixCodeCase = gen.Code.Contains(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE);
+                var code = gen.Code;
+                var codeWithoutTwix = code.Remove(code.IndexOf(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE),
+                                                               MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE.Length);
 
-                if(requiredTwixCodeCase)
+                //case: code dosn't contain twix but contain required code
+                if (codeWithoutTwix.Contains(MiruineProduceGenValidationConstatns.REQURIED_CODE)
+                    && !codeWithoutTwix.Contains(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE))
                 {
-                    var code = gen.Code;
-                    var codeWithoutTwix = code.Remove(code.IndexOf(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE), 1);
-                    
-                    //case: contain required code "5" 
-                    bool requiredCodeCase = codeWithoutTwix.Contains(MiruineProduceGenValidationConstatns.REQURIED_CODE);
-                    if(requiredCodeCase)
-                    {
-                        var firstCode = int.Parse(gen.Code.First().ToString());
-                        var lastCode = int.Parse(gen.Code.Last().ToString());
+                    var firstCode = int.Parse(gen.Code.First().ToString());
+                    var lastCode = int.Parse(gen.Code.Last().ToString());
 
-                        //case: sum of first and last code of gen must be less or eqaul gen index
-                        return firstCode + lastCode <= gen.Index + 1;
-                    }
+                    //case: sum of first and last code of gen must be less or eqaul gen index
+                    return firstCode + lastCode <= gen.Index + 1;
                 }
             }
 

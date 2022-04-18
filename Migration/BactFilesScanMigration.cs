@@ -47,6 +47,7 @@ namespace InSearchOfMiruine.FIleManagement
                                                     .Select(s => ValidateAndGetStrain(s))
                                                     .Where(s => s.IsValid && CanStrainGensProduceMiruine(s))
                                                     .Select(n => n.StrainNumber)
+                                                    .OrderBy(n => int.Parse(n))
                                                     .ToHashSet();
 
                 return new ScanResult()
