@@ -5,7 +5,7 @@
     /// </summary>
     public class FoldersPathConstants
     {
-        public const string BACTS_FOLDER_PATH = "C:\\temp\\Bact\\folder";
-        public const string LOGS_FOLDER_PATH = "C:\\temp\\Bact\\out";
+        public const string BACTS_FOLDER_PATH = "C:\\temp\\Bact";
+        public const string LOGS_FOLDER_PATH = "C:\\temp\\out";
     }
 }
