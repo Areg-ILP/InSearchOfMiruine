@@ -26,13 +26,11 @@ namespace InSearchOfMiruine.Models
 
             if (requiredTwixCodeCase)
             {
-                var code = gen.Code;
-                var codeWithoutTwix = code.Remove(code.IndexOf(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE),
-                                                               MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE.Length);
+                var tmpCode = gen.Code;
+                var codeWithoutTwixs = tmpCode.Replace(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE, string.Empty);
 
-                //case: code dosn't contain twix but contain required code
-                if (codeWithoutTwix.Contains(MiruineProduceGenValidationConstatns.REQURIED_CODE)
-                    && !codeWithoutTwix.Contains(MiruineProduceGenValidationConstatns.REQURIED_TWIX_CODE))
+                //case: code dosn't contain twixs but contain required code
+                if (codeWithoutTwixs.Contains(MiruineProduceGenValidationConstatns.REQURIED_CODE))
                 {
                     var firstCode = int.Parse(gen.Code.First().ToString());
                     var lastCode = int.Parse(gen.Code.Last().ToString());
